@@ -1,20 +1,30 @@
 <!-- ここから変更 -->
 <?php
 include 'lib/secure.php';
+include 'lib/connect.php';
+include 'lib/queryArticle.php';
+include 'lib/article.php';
 ?>
-<!-- ここまで変更 -->
-<!doctype html>
-<html lang="ja">
 
-<head>
-  // 省略
+$title = "";        // タイトル
+  $body = "";         // 本文
+  $title_alert = "";  // タイトルのエラー文言
+  $body_alert = "";   // 本文のエラー文言
 
-  <!-- ここから追加する -->
-  <?php
-  session_start();
-  if (!isset($_SESSION['id'])) {
+  if (!empty($_POST['title']) && !empty($_POST['body'])){
+    // titleとbodyがPOSTメソッドで送信されたとき
+    $title = $_POST['title'];
+    $body = $_POST['body'];
+    
+    // ===== ここから変更 =====
+    $article = new Article();
+    $article->setTitle($title);
+    $article->setBody($body);
+    $article->save();
+
+
     header('Location: login.php');
-  }
+
   ?>
 
   <!doctype html>
