@@ -14,6 +14,15 @@ class Article{
     $queryArticle->setArticle($this);
     $queryArticle->save();
   }
+ // ===== 追加ここから：save()とgetId()の間にdelete()を追加する =====
+ public function delete(){
+  $queryArticle = new QueryArticle();
+  $queryArticle->setArticle($this);
+  $queryArticle->delete();
+}
+// ===== 追加ここまで =====
+
+
 
   public function getId(){
     return $this->id;
@@ -68,6 +77,7 @@ class Article{
   public function setFile($file){
     $this->file = $file;
   }
+
 
 
   public function setCreatedAt($created_at){
